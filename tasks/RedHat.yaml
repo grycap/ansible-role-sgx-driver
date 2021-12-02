@@ -4,6 +4,11 @@
     - make
     - gcc
 
+- name: Install pre-requisites RHEL 8
+  yum:
+    name: elfutils-libelf-devel
+  when: ansible_distribution_major_version|int >= 8
+
 - name: Chek if matching kernel headers are installed 
   stat:
     path: /usr/src/kernels/{{ ansible_kernel }}
@@ -21,11 +26,12 @@
   - name: Install last version of kernel and kernel headers and reboot
     block:
 
-    - name: Install kernel-devel
+    - name: Install kernel-devel and kernel
       yum:
         name:
         - kernel-devel
         - kernel
+        state: latest
     - name: Reboot the machine
       reboot:
 
@@ -33,7 +39,4 @@
 
   when: not kernel_headers.stat.exists
 
-- name: Install pre-requisites RHEL 8
-  yum:
-    name: elfutils-libelf-devel
-  when: ansible_distribution_major_version|int >= 8
+
