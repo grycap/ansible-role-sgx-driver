@@ -10,7 +10,7 @@
 
 - name: Create kernel driver directory
   file:
-      path: /lib/modules/{{ ansible_kerne l}}/kernel/drivers/intel/sgx
+      path: /lib/modules/{{ ansible_kernel }}/kernel/drivers/intel/sgx
       state: directory
       recurse: yes
 

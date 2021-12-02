@@ -33,5 +33,3 @@ jobs:
       - name: Basic role check
         run: sudo ansible-playbook tests/test.yml -i tests/inventory
 
-      - name: Test driver is installed
-        run: sudo ls -l /dev/isgx
