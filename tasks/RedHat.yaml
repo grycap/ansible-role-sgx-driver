@@ -1,0 +1,11 @@
+- name: Install pre-requisites
+  yum:
+    name:
+    - kernel-devel-{{ansible_kernel}}
+    - make
+    - gcc
+
+- name: Install pre-requisites RHEL 8
+  yum:
+    name: elfutils-libelf-devel
+  when: ansible_distribution_major_version|int >= 8

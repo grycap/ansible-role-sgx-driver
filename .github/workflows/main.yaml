@@ -1,0 +1,37 @@
+---
+name: CI
+
+on:
+
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test-driver:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install python
+        run: sudo apt update && sudo apt install -y python3 python3-pip python3-setuptools
+
+      - name: Install Ansible
+        run: sudo pip3 install ansible==2.9.22
+
+      - name: Create ansible.cfg with correct roles_path
+        run: sudo printf '[defaults]\nhost_key_checking = False\nroles_path=../' > ansible.cfg
+
+      - name: Basic role syntax check
+        run: sudo ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+
+      - name: Basic role check
+        run: sudo ansible-playbook tests/test.yml -i tests/inventory
+
+      - name: Test driver is installed
+        run: sudo ls -l /dev/isgx

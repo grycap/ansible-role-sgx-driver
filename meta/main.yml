@@ -1,0 +1,19 @@
+galaxy_info:
+  role_name: sgx-driver
+  author: Miguel Caballer
+  description: Install Intel SGX driver
+  company: GRyCAP
+  license: Apache
+  min_ansible_version: 2.0
+  platforms:
+  - name: EL
+    versions:
+    - 7  
+    - 8
+  - name: Ubuntu
+    versions:
+    - bionic
+    - focal
+  galaxy_tags:
+    - sgx
+dependencies: []

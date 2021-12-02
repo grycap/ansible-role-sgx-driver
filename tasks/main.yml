@@ -1,0 +1,19 @@
+---
+- stat: path=/dev/isgx
+  register: sgx_installed
+
+- block:
+
+    - name: Download and unarchive driver
+      unarchive:
+        src: https://github.com/intel/linux-sgx-driver/archive/refs/tags/sgx_diver_{{driver_version}}.tar.gz
+        dest: /tmp
+        remote_src: yes
+
+    - name: Include "{{ansible_os_family}}" SGX tasks
+      include_tasks: "{{ansible_os_family}}.yaml"
+
+    - name: Install driver
+      include_tasks: install.yml
+
+  when: not sgx_installed.stat.exists
