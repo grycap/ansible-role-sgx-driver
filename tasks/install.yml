@@ -25,6 +25,7 @@
     path: /etc/modules
     regexp: '^isgx$'
     line: isgx
+    create: yes
 
 - name: Install driver dependencies
   command: /sbin/depmod

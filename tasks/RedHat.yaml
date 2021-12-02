@@ -32,8 +32,12 @@
         - kernel-devel
         - kernel
         state: latest
+
     - name: Reboot the machine
       reboot:
+
+    - name: refresh facts
+      setup:
 
     when: kernel_install is failed
 
