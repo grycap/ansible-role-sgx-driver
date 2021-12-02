@@ -1,9 +1,37 @@
 - name: Install pre-requisites
   yum:
     name:
-    - kernel-devel-{{ ansible_kernel }}
     - make
     - gcc
+
+- name: Chek if matching kernel headers are installed 
+  stat:
+    path: /usr/src/kernels/{{ ansible_kernel }}
+  register: kernel_headers
+
+- name: Instal kernel headers
+  block:
+
+  - name: Install kernel-devel-{{ ansible_kernel }}
+    yum:
+      name: kernel-devel-{{ ansible_kernel }}
+    ignore_errors: yes
+    register: kernel_install
+
+  - name: Install last version of kernel and kernel headers and reboot
+    block:
+
+    - name: Install kernel-devel
+      yum:
+        name:
+        - kernel-devel
+        - kernel
+    - name: Reboot the machine
+      reboot:
+
+    when: kernel_install is failed
+
+  when: not kernel_headers.stat.exists
 
 - name: Install pre-requisites RHEL 8
   yum:
