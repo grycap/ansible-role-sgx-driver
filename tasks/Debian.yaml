@@ -1,6 +1,6 @@
 - name: Install pre-requisites
   apt:
     pkg:
-    - linux-headers-{{ansible_kernel}}
+    - linux-headers-{{ ansible_kernel }}
     - make
     - gcc

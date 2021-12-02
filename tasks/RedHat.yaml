@@ -1,7 +1,7 @@
 - name: Install pre-requisites
   yum:
     name:
-    - kernel-devel-{{ansible_kernel}}
+    - kernel-devel-{{ ansible_kernel }}
     - make
     - gcc
 

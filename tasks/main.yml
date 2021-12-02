@@ -10,8 +10,8 @@
         dest: /tmp
         remote_src: yes
 
-    - name: Include "{{ansible_os_family}}" SGX tasks
-      include_tasks: "{{ansible_os_family}}.yaml"
+    - name: Include "{{ ansible_os_family }}" SGX tasks
+      include_tasks: "{{ ansible_os_family }}.yaml"
 
     - name: Install driver
       include_tasks: install.yml

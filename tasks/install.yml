@@ -1,17 +1,17 @@
 - name: Build the driver
   make:
-    chdir: /tmp/linux-sgx-driver-sgx_diver_{{driver_version}}/
+    chdir: /tmp/linux-sgx-driver-sgx_diver_{{ driver_version }}/
 
 - name: Create kernel driver directory
   file:
-      path: /lib/modules/{{ansible_kernel}}/kernel/drivers/intel/sgx
+      path: /lib/modules/{{ ansible_kerne l}}/kernel/drivers/intel/sgx
       state: directory
       recurse: yes
 
 - name: Copy isgx.ko to kernel driver directory
   copy:
     src: /tmp/linux-sgx-driver-sgx_diver_{{driver_version}}/isgx.ko
-    dest: /lib/modules/{{ansible_kernel}}/kernel/drivers/intel/sgx/isgx.ko
+    dest: /lib/modules/{{ ansible_kernel }}/kernel/drivers/intel/sgx/isgx.ko
     remote_src: yes
 
 - name: Add isgx in /etc/modules
