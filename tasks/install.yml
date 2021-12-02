@@ -1,3 +1,9 @@
+- name: Download and unarchive driver
+  unarchive:
+    src: https://github.com/intel/linux-sgx-driver/archive/refs/tags/sgx_diver_{{ driver_version }}.tar.gz
+    dest: /tmp
+    remote_src: yes
+
 - name: Build the driver
   make:
     chdir: /tmp/linux-sgx-driver-sgx_diver_{{ driver_version }}/
@@ -10,7 +16,7 @@
 
 - name: Copy isgx.ko to kernel driver directory
   copy:
-    src: /tmp/linux-sgx-driver-sgx_diver_{{driver_version}}/isgx.ko
+    src: /tmp/linux-sgx-driver-sgx_diver_{{ driver_version }}/isgx.ko
     dest: /lib/modules/{{ ansible_kernel }}/kernel/drivers/intel/sgx/isgx.ko
     remote_src: yes
 
