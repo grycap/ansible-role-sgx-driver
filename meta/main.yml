@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: sgx-driver
+  role_name: sgx_driver
   author: Miguel Caballer
   description: Install Intel SGX driver
   company: GRyCAP

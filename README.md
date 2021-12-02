@@ -21,7 +21,7 @@ This an example of how to install the driver:
 
 ```yml
   roles:
-    - { role: 'grycap.sgx-driver' }
+    - { role: 'grycap.sgx_driver' }
 ```
 
 
